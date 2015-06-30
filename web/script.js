@@ -11,7 +11,7 @@ var opts = {
 		left: 100,
 		right: 100,
 		top: 120,
-		bottom: 100
+		bottom: 120
 	},
 	note: {
 		y: 30
@@ -33,7 +33,8 @@ var elements = {
 	svg: null,
 	ax: null,
 	ay: null,
-	series: null
+	series: null,
+	tzinfo: null
 };
 
 var dayNames = 'Sun Mon Tue Wed Thu Fri Sat'.split(' ');
@@ -53,6 +54,7 @@ function onLoad(event) {
 	elements.ay = elements.svg.append('g').attr('class', 'axis y-axis');
 	elements.plot = elements.svg.append('g').attr('class', 'plot-area');
 	elements.series = elements.plot.append('path').attr('class', 'series');
+	elements.tzinfo = elements.svg.append('text').attr('class', 'tzinfo');
 	elements.ax.append('line').attr('class', 'axis-line x-axis-line');
 	elements.ay.append('line').attr('class', 'axis-line y-axis-line');
 	/* Window resize event */
@@ -162,7 +164,7 @@ function displayData() {
 	var range = dataset.range;
 	/* Geometry generators */
 	var generators = {
-		ax: d3.time.scale(),
+		ax: d3.time.scale.utc(),
 		ay: d3.scale[['linear', 'log'][scaleMode]](),
 		series: d3.svg.line()
 	};
@@ -275,6 +277,12 @@ function displayData() {
 		.attr('y', opts.note.y)
 		.attr('width', generators.ax(range.end) - generators.ax(range.start))
 		.attr('height', 70);
+	/* TZINFO */
+	elements.tzinfo
+		.attr('x', generators.ax((range.start + range.end) / 2))
+		.attr('y', h - 10)
+		.attr('text-anchor', 'middle')
+		.text('Date/times are in UTC');
 }
 
 function dig2(s) {

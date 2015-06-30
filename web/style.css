@@ -142,3 +142,9 @@ svg {
 	left: 5px;
 	top: -5px;
 }
+
+foreignObject p {
+	font-size: 12px;
+	line-height: 1.1;
+	margin-bottom: 2px;
+}
