@@ -1,10 +1,6 @@
 (function (window, d3, document) {
 'use strict';
 
-if (/Trident|Safari|Apple/.test(window.navigator.userAgent)) {
-	window.alert('Your browser lacks full support for inline SVG, this page may not work correctly.  Recommended: Firefox/Chrome');
-}
-
 var opts = {
 	container: 'main>svg',
 	margin: {
