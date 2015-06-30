@@ -89,6 +89,7 @@ function setScaleMode(event) {
 
 function refresh() {
 	d3.text(opts.apiTarget, 'text/plain', receiveData);
+	setTimeout(refresh, 300000);
 }
 
 function parseData(text) {
