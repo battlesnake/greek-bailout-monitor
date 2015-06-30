@@ -4,7 +4,7 @@ set -euo pipefail
 
 declare -r url='https://www.indiegogo.com/projects/greek-bailout-fund'
 
-declare -ri interval=10
+declare -ri interval=60
 
 declare -r log='greek-log.tsv'
 

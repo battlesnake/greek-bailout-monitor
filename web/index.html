@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Greek bailout crowdfunding campaign tracker</title>
+<link rel="stylesheet" href="bower_components/open-sans/css/open-sans.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+	<span class="choice" id="scale">
+		<input type="radio" name="scale" id="scale1" value="0" class="scale-choice">
+		<label for="scale1">Progress so far</label>
+		<input type="radio" name="scale" id="scale2" value="1" class="scale-choice">
+		<label for="scale2">Progress total</label>
+	</span>
+	<h1>Greek bailout <a href="https://www.indiegogo.com/projects/greek-bailout-fund" target="_blank">crowdfunding campaign</a> tracker</h1>
+</header>
+<main id="container">
+	<svg>
+		<foreignObject class="note">
+			<p>If anyone has data for the start of the campaign, please submit it in any format you like via a pull request on Github, so I can include it.</p>
+			<p style="margin-top: 5px">Repo: <a href="http://github.com/battlesnake/greek-bailout-monitor" target="_blank"><code>github.com/battlesnake/greek-bailout-monitor</code></a></p>
+		</foreignObject>
+	</svg>
+</main>
+<footer>
+	<span>
+		<a href="http://hackology.co.uk" target="_blank">Mark K Cowan</a> - <a href="http://github.com/battlesnake/greek-bailout-monitor" target="_blank">Github</a> - <a>Uses d3.js</a>
+	</span>
+</footer>
+<script src="bower_components/d3/d3.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
