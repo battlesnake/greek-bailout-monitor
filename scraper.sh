@@ -8,11 +8,19 @@ declare -ri interval=20
 
 declare -r log='greek-log.tsv'
 
+declare -r tmp="$(mktemp)"
+
+trap clean_temp EXIT
+
 function require {
 	if ! which "$1" &>/dev/null; then
 		printf >&2 -- 'Required program missing: "%s"\n' "$1"
 		return 1
 	fi
+}
+
+function clean_temp {
+	rm -f -- "${tmp}.*"
 }
 
 function init_log {
@@ -28,18 +36,21 @@ function log {
 }
 
 function scrape {
-	local -r html="$(mktemp).html"
-	local -r xml="$(mktemp).xml"
+	local -r html="${tmp}.html"
+	local -r xml="${tmp}.xml"
 
 	curl -s "${url}" > "${html}"
 
 	xmllint --html --xmlout --format --nowarning --recover --output "${xml}" "${html}" 2>/dev/null
+	rm -f -- "${html}"
 
 	local -r value_str="$(xmlstarlet sel -t -v '//*[contains(@class, "i-balance")]//*[starts-with(@class, "currency")]' "${xml}")"
+	rm -f -- "${xml}"
 
 	if ! printf -- '%s' "${value_str}" | grep -qxP '.[\d,\.\s]+\s?\w+'; then
 		printf >&2 -- 'Failed to parse currency value "%s"\n' "${value_str}"
-		exit 1
+		printf -- 'ERROR'
+		return 1
 	fi
 
 	local -r value="$(printf -- '%s' "${value_str}" | sed -e 's/[^0-9]//g')"
@@ -66,6 +77,7 @@ function monitor {
 	done
 }
 
+require 'mktemp'
 require 'curl'
 require 'xmllint'
 require 'xmlstarlet'
