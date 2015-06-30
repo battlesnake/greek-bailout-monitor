@@ -1,0 +1,21 @@
+{
+  "name": "greek-log",
+  "version": "0.0.0",
+  "homepage": "https://github.com/battlesnake/greek-bailout-monitor",
+  "authors": [
+    "Mark K Cowan <mark@battlesnake.co.uk>"
+  ],
+  "main": "index.html",
+  "license": "Private",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.5",
+    "open-sans": "~1.1.0"
+  }
+}

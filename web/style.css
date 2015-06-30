@@ -1,0 +1,144 @@
+*, a:link, a:visited, a:hover {
+	box-sizing: border-box;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	text-decoration: inherit;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	color: inherit;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-size: 16px;
+	line-height: 16px;
+	font-family: 'Open Sans';
+	font-weight: 400;
+	color: #444;
+	background: #ffe;
+	padding: 106px 40px 76px;
+	height: 100%;
+	min-height: 100%;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 66px;
+	font-size: 20px;
+	line-height: 26px;
+	font-weight: 600;
+	padding: 20px 20px;
+	background: goldenrod;
+	color: white;
+	z-index: 1000;
+}
+
+header h1 {
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 36px;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 600;
+	font-weight: 600;
+	padding: 10px 10px;
+	text-align: center;
+	background: tomato;
+	color: white;
+	z-index: 1000;
+}
+
+footer {
+	font-weight: 600;
+}
+
+a:link, a:visited {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-decoration-color: white;
+}
+
+main, svg {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+svg {
+	background: white;
+	border: 1px solid olive;
+}
+
+.series {
+	stroke: blue;
+	stroke-width: 2;
+	fill: none;
+}
+
+.axis-line {
+	stroke: black;
+	stroke-width: 2;
+}
+
+.axis-label text {
+	text-anchor: end;
+}
+
+.x-axis-label text {
+	transform: rotate(-45deg);
+}
+
+.axis-label line {
+	stroke: black;
+	stroke-width: 2;
+}
+
+.data-point {
+	stroke: none;
+	fill: blue;
+}
+
+.choice {
+	border-radius: 10px;
+	background: rgba(0, 0, 0, 0.04);
+	color: gold;
+	overflow: hidden;
+}
+
+.choice input[type="radio"] {
+	display: none;
+}
+
+.choice input[type="radio"]+label {
+	display: inline-block;
+	padding: 10px;
+}
+
+.choice input[type="radio"]:checked+label {
+	background: darkgoldenrod;
+}
+
+#scale {
+	float: right;
+	display: block;
+	font-size: 14px;
+	line-height: 1;
+	position: relative;
+	left: 5px;
+	top: -5px;
+}
