@@ -4,7 +4,7 @@ set -euo pipefail
 
 declare -r url='https://www.indiegogo.com/projects/greek-bailout-fund'
 
-declare -ri interval=20
+declare -ri interval=10
 
 declare -r log='greek-log.tsv'
 
@@ -39,13 +39,13 @@ function scrape {
 	local -r html="${tmp}.html"
 	local -r xml="${tmp}.xml"
 
-	curl -s "${url}" > "${html}"
+	rm -f -- "${html}" "${xml}"
 
-	xmllint --html --xmlout --format --nowarning --recover --output "${xml}" "${html}" 2>/dev/null
-	rm -f -- "${html}"
+	curl --silent --max-time "${interval}" "${url}" > "${html}"
+
+	xmllint --html --xmlout --format --nonet --nowarning --recover --output "${xml}" "${html}" 2>/dev/null
 
 	local -r value_str="$(xmlstarlet sel -t -v '//*[contains(@class, "i-balance")]//*[starts-with(@class, "currency")]' "${xml}")"
-	rm -f -- "${xml}"
 
 	if ! printf -- '%s' "${value_str}" | grep -qxP '.[\d,\.\s]+\s?\w+'; then
 		printf >&2 -- 'Failed to parse currency value "%s"\n' "${value_str}"
