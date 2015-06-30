@@ -55,13 +55,22 @@ function onLoad(event) {
 	elements.series = elements.plot.append('path').attr('class', 'series');
 	elements.ax.append('line').attr('class', 'axis-line x-axis-line');
 	elements.ay.append('line').attr('class', 'axis-line y-axis-line');
+	/* Window resize event */
 	window.addEventListener('resize', onResize);
+	/* Scale selector */
 	[].slice.apply(document.querySelectorAll('#scale input.scale-choice'))
-		.forEach(function (el) {
-			el.addEventListener('click', setScaleMode);
+		.map(function (el) {
 			if (el.checked) {
 				scaleMode = +el.getAttribute('value');
 			}
+			return el;
+		})
+		.map(function (el) {
+			el.checked = +el.getAttribute('value') === scaleMode;
+			return el;
+		})
+		.forEach(function (el) {
+			el.addEventListener('change', setScaleMode);
 		});
 	refresh();
 }
