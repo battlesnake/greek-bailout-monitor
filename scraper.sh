@@ -16,7 +16,7 @@ homepage)
 	;;
 esac
 
-declare -ri interval=60
+declare -ri interval=150
 
 declare -r log='greek-log.tsv'
 
