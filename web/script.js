@@ -254,11 +254,11 @@ function displayData() {
 				return '';
 			}
 			if (d >= 1e6) {
-				return String(Math.floor(d / 1e6)) + 'M';
+				return '€' + String(Math.floor(d / 1e6)) + 'M';
 			} else if (d >= 1e3) {
-				return String(Math.floor(d / 1e3)) + 'k';
+				return '€' + String(Math.floor(d / 1e3)) + 'k';
 			} else {
-				return String(d);
+				return '€' + String(d);
 			}
 		});
 	/* Line */
