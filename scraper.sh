@@ -16,7 +16,7 @@ homepage)
 	;;
 esac
 
-declare -ri interval=150
+declare -ri interval=300
 
 declare -r log='greek-log.tsv'
 
@@ -79,7 +79,7 @@ function monitor {
 	while true; do
 		while (( "$(timestamp)" < next )); do
 			printf >&2 -- '.'
-			sleep 0.1
+			sleep 2
 		done
 		next+=interval
 		local now="$(date -uIseconds)"
