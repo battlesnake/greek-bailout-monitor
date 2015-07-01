@@ -2,7 +2,19 @@
 
 set -euo pipefail
 
-declare -r url='https://www.indiegogo.com/projects/greek-bailout-fund'
+case homepage in
+project)
+	declare -r url='https://www.indiegogo.com/projects/greek-bailout-fund'
+	declare -r xpath='//*[contains(@class, "i-balance")]//*[starts-with(@class, "currency")]/text()'
+	;;
+homepage)
+	declare -r url='https://www.indiegogo.com'
+	declare -r xpath='//a[contains(@class, "i-project")][starts-with(@href, "/projects/greek-bailout-fund")]//*[contains(@class, "currency")]/span/text()'
+	;;
+*)
+	exit 1
+	;;
+esac
 
 declare -ri interval=60
 
@@ -45,7 +57,7 @@ function scrape {
 
 	xmllint --html --xmlout --format --nonet --nowarning --recover --output "${xml}" "${html}" 2>/dev/null
 
-	local -r value_str="$(xmlstarlet sel -t -v '//*[contains(@class, "i-balance")]//*[starts-with(@class, "currency")]' "${xml}")"
+	local -r value_str="$(xmlstarlet sel -t -v "${xpath}" "${xml}")"
 
 	if ! printf -- '%s' "${value_str}" | grep -qxP '.[\d,\.\s]+\s?\w+'; then
 		printf >&2 -- 'Failed to parse currency value "%s"\n' "${value_str}"
@@ -84,5 +96,23 @@ require 'xmlstarlet'
 require 'sed'
 require 'date'
 
-init_log
-monitor
+if (( $# == 0)); then
+	set -- log
+fi
+
+while (( $# )); do
+	declare arg="$1"
+	shift
+	printf >&2 -- 'Processing command "%s"...\n' "${arg}"
+	case "${arg}" in
+	test) printf >&2 -- 'Scraped: "%s"\n' "$(scrape)";;
+	log)
+		init_log
+		monitor
+		;;
+	*)
+		printf >&2 -- 'Invalid command: "%s"\n' "${arg}"
+		exit 1
+		;;
+	esac
+done
