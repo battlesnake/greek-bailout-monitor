@@ -95,15 +95,23 @@ svg {
 	stroke-width: 2;
 }
 
-.axis-label text {
+.axis-label-text {
 	text-anchor: end;
 }
 
-.x-axis-label text {
+.x-axis-label-text {
 	transform: rotate(-45deg);
 }
 
-.axis-label line {
+.y-axis-label-text {
+	dominant-baseline: middle;
+}
+
+.tick.minor {
+	stroke-width: 1;
+}
+
+.axis-tick {
 	stroke: black;
 	stroke-width: 2;
 }

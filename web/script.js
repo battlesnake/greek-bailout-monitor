@@ -17,8 +17,9 @@ var opts = {
 		y: 10
 	},
 	tickMarkLength: {
-		x: 5,
-		y: 5
+		x: 7,
+		y: 7,
+		yminor: 3
 	},
 	line: true,
 	points: false,
@@ -129,8 +130,8 @@ function getRange(data) {
 	};
 	range.min = 0;
 	if (scaleMode === 1) {
-		range.min = 1e5;
-		range.max = 1.6e9;
+		range.min = 1e0;
+		range.max = 2e9;
 		range.end = range.start + 8 * 86400 * 1000;
 	}
 	return range;
@@ -195,11 +196,13 @@ function displayData() {
 	axLabel.transition().duration(200)
 		.attr('transform', xAxisLabelTransform);
 	axLabel.append('line')
+		.attr('class', 'tick axis-tick x-axis-tick')
 		.attr('x1', 0)
 		.attr('x2', 0)
 		.attr('y1', 0)
 		.attr('y2', tickMarkLength.x);
 	axLabel.append('text')
+		.attr('class', 'axis-label-text x-axis-label-text')
 		.attr('x', -axisLabelDistance.x * 1.41)
 		.attr('y', axisLabelDistance.x * 1.41)
 		.text(function (d, i) {
@@ -227,21 +230,32 @@ function displayData() {
 	ayLabel.selectAll('*').remove();
 	ayLabel.transition().duration(200)
 		.attr('transform', yAxisLabelTransform);
+	function isYLogMinor(d) {
+		return !/^1(000)*$/.test(String(d));
+	}
 	ayLabel.append('line')
+		.attr('class', 'tick axis-tick y-axis-tick')
 		.attr('x1', 0)
-		.attr('x2', -tickMarkLength.y)
+		.attr('x2', function (d, i) {
+			return (scaleMode === 1 && isYLogMinor(d)) ?
+				-tickMarkLength.yminor : -tickMarkLength.y;
+		})
 		.attr('y1', 0)
-		.attr('y2', 0);
+		.attr('y2', 0)
+		.classed('minor', function (d, i) {
+			return isYLogMinor(d);
+		});
 	ayLabel.append('text')
+		.attr('class', 'axis-label-text y-axis-label-text')
 		.attr('x', -axisLabelDistance.y)
 		.attr('y', 0)
 		.text(function (d, i) {
-			if (scaleMode === 1 && String(d).charAt(0) !== '1') {
+			if (scaleMode === 1 && isYLogMinor(d)) {
 				return '';
 			}
-			if (d >= 1e7) {
+			if (d >= 1e6) {
 				return String(Math.floor(d / 1e6)) + 'M';
-			} else if (d >= 1e4) {
+			} else if (d >= 1e3) {
 				return String(Math.floor(d / 1e3)) + 'k';
 			} else {
 				return String(d);
