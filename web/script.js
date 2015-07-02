@@ -253,10 +253,12 @@ function displayData() {
 			if (scaleMode === 1 && isYLogMinor(d)) {
 				return '';
 			}
-			if (d >= 1e6) {
-				return '€' + String(Math.floor(d / 1e6)) + 'M';
+			if (d >= 1e9) {
+				return '€' + String(Math.floor(d / 1e8) / 10) + 'B';
+			} else if (d >= 1e6) {
+				return '€' + String(Math.floor(d / 1e5) / 10) + 'M';
 			} else if (d >= 1e3) {
-				return '€' + String(Math.floor(d / 1e3)) + 'k';
+				return '€' + String(Math.floor(d / 1e2) / 10) + 'k';
 			} else {
 				return '€' + String(d);
 			}
