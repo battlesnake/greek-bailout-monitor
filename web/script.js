@@ -6,8 +6,14 @@ var opts = {
 	margin: {
 		left: 100,
 		right: 100,
-		top: 120,
+		top: 100,
 		bottom: 120
+	},
+	marginMobile: {
+		left: 50,
+		right: 20,
+		top: 20,
+		bottom: 90
 	},
 	note: {
 		y: 30
@@ -152,7 +158,7 @@ function receiveData(error, text) {
 }
 
 function displayData() {
-	var margin = opts.margin;
+	var margin = window.screen.width > 1024 ? opts.margin : opts.marginMobile;
 	var axisLabelDistance = opts.axisLabelDistance;
 	var tickMarkLength = opts.tickMarkLength;
 	var rc = elements.svg[0][0].getBoundingClientRect();
