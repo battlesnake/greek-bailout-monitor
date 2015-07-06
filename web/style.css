@@ -85,9 +85,14 @@ svg {
 }
 
 .series {
-	stroke: blue;
-	stroke-width: 2;
+	stroke: darkblue;
+	stroke-width: 5;
 	fill: none;
+}
+
+.data-point {
+	stroke: none;
+	fill: white;
 }
 
 .axis-line {
@@ -114,11 +119,6 @@ svg {
 .axis-tick {
 	stroke: black;
 	stroke-width: 2;
-}
-
-.data-point {
-	stroke: none;
-	fill: blue;
 }
 
 .choice {

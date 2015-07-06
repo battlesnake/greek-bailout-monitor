@@ -22,7 +22,7 @@ var opts = {
 		yminor: 3
 	},
 	line: true,
-	points: false,
+	points: true,
 	apiTarget: 'https://raw.githubusercontent.com/battlesnake/greek-bailout-monitor/master/greek-log.tsv'
 };
 
@@ -276,7 +276,7 @@ function displayData() {
 			.data(data);
 		points.enter().append('circle')
 			.attr('class', 'data-point')
-			.attr('r', '2')
+			.attr('r', '1')
 			.attr('cx', generators.ax(range.end))
 			.attr('cy', generators.ay(range.min));
 		points.exit().remove();
