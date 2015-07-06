@@ -132,7 +132,7 @@ function getRange(data) {
 	if (scaleMode === 1) {
 		range.min = 1e0;
 		range.max = 2e9;
-		range.end = range.start + 8 * 86400 * 1000;
+		range.end = new Date('2015-07-07T10:30:00+0000');
 	}
 	return range;
 }
