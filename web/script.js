@@ -212,9 +212,7 @@ function displayData() {
 		.attr('x', -axisLabelDistance.x * 1.41)
 		.attr('y', axisLabelDistance.x * 1.41)
 		.text(function (d, i) {
-			return dayNames[d.getDay()] + ' ' +
-				dig2(d.getHours()) + ':' +
-				dig2(d.getMinutes());
+			return dayNames[d.getUTCDay()] + '-' + d.getUTCDate() + ' ' + dig2(d.getUTCHours());
 		});
 	/* y-axis */
 	elements.ay.select('line.y-axis-line')
