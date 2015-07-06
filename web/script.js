@@ -212,7 +212,7 @@ function displayData() {
 		.attr('x', -axisLabelDistance.x * 1.41)
 		.attr('y', axisLabelDistance.x * 1.41)
 		.text(function (d, i) {
-			return dayNames[d.getUTCDay()] + '-' + d.getUTCDate() + ' ' + dig2(d.getUTCHours());
+			return dayNames[d.getUTCDay()] + '-' + d.getUTCDate() + ' ' + d.getUTCHours() + 'H';
 		});
 	/* y-axis */
 	elements.ay.select('line.y-axis-line')
@@ -300,14 +300,6 @@ function displayData() {
 		.attr('y', h - 10)
 		.attr('text-anchor', 'middle')
 		.text('Date/times are in UTC');
-}
-
-function dig2(s) {
-	s = String(s);
-	while (s.length < 2) {
-		s = '0' + s;
-	}
-	return s;
 }
 
 })(window, window.d3, document);
